@@ -1,16 +1,420 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Click Fast! - Accueil</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="main.css">
+
 </head>
 
 <body>
-    <div>Click Fast!</div>
+
+    <div class="config glass-card w-full max-w-2xl p-8">
+
+        <!-- EN-TÊTE -->
+
+        <div class="text-center mb-8">
+
+            <div class="flex justify-center mb-4">
+
+                <div
+                    class="w-20 h-20 md:w-24 md:h-24 rounded-full icon-circle flex items-center justify-center float-animation">
+
+                    <i class="fas fa-bolt text-white text-3xl md:text-4xl"></i>
+
+                </div>
+
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-bold gradient-text mb-2">
+                Click Fast!
+            </h1>
+
+            <p class="text-slate-400 text-sm md:text-base">
+                Testez vos réflexes et votre précision
+            </p>
+
+        </div>
+
+
+        <!-- STATISTIQUES -->
+
+        <div class="stats-grid mb-8">
+
+            <div class="stat-item">
+
+                <div class="value">0</div>
+
+                <div class="label">🏆 Meilleur score</div>
+
+            </div>
+
+            <div class="stat-item">
+
+                <div class="value text-purple-400">20s</div>
+
+                <div class="label">⏱️ Durée défaut</div>
+
+            </div>
+
+            <div class="stat-item">
+
+                <div class="value text-pink-400">60px</div>
+
+                <div class="label">🎯 Difficulté défaut</div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FORMULAIRE -->
+
+        <form id="config-form" class="space-y-6">
+
+            <!-- PSEUDO -->
+
+            <div>
+
+                <label for="pseudo" class="input-label">
+
+                    <i class="fas fa-user"></i>Pseudo
+
+                </label>
+
+                <input type="text" id="pseudo" name="pseudo" class="input-field"
+                    placeholder="Entrez votre pseudo (2-20 caractères)" minlength="2" maxlength="20" required
+                    autocomplete="off" />
+
+            </div>
+
+
+            <!-- MODE -->
+
+            <div>
+
+                <label class="input-label">
+
+                    <i class="fas fa-gamepad"></i>Mode de jeu
+
+                </label>
+
+                <div class="radio-grid-3">
+
+                    <!-- Classique -->
+
+                    <label class="radio-card">
+
+                        <input type="radio" name="mode" value="Classique" />
+
+                        <div class="radio-card-content">
+
+                            <i class="fas fa-bullseye radio-icon"></i>
+
+                            <div class="radio-title">
+                                Classique
+                            </div>
+
+                            <div class="radio-desc">
+                                Score uniquement
+                            </div>
+
+                        </div>
+
+                    </label>
+
+
+                    <!-- Précision -->
+
+                    <label class="radio-card">
+
+                        <input type="radio" name="mode" value="Précision" checked />
+
+                        <div class="radio-card-content">
+
+                            <i class="fas fa-crosshairs radio-icon"></i>
+
+                            <div class="radio-title">
+                                Précision
+                            </div>
+
+                            <div class="radio-desc">
+                                Score + Précision
+                            </div>
+
+                        </div>
+
+                    </label>
+
+
+                    <!-- Défi -->
+
+                    <label class="radio-card">
+
+                        <input type="radio" name="mode" value="Défi" />
+
+                        <div class="radio-card-content">
+
+                            <i class="fas fa-bolt radio-icon"></i>
+
+                            <div class="radio-title">
+                                Défi
+                            </div>
+
+                            <div class="radio-desc">
+                                Cible mobile
+                            </div>
+
+                        </div>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- DIFFICULTÉ -->
+
+            <div>
+
+                <label class="input-label">
+
+                    <i class="fas fa-bullseye"></i>Difficulté
+
+                </label>
+
+                <div class="radio-grid-3">
+
+                    <!-- Facile -->
+
+                    <label class="radio-card">
+
+                        <input type="radio" name="difficulty" value="80" />
+
+                        <div class="radio-card-content">
+
+                            <i class="fas fa-face-smile radio-icon"></i>
+
+                            <div class="radio-title">
+                                Facile
+                            </div>
+
+                            <div class="radio-desc">
+                                80px
+                            </div>
+
+                        </div>
+
+                    </label>
+
+
+                    <!-- Moyenne -->
+
+                    <label class="radio-card">
+
+                        <input type="radio" name="difficulty" value="60" checked />
+
+                        <div class="radio-card-content">
+
+                            <i class="fas fa-face-meh radio-icon"></i>
+
+                            <div class="radio-title">
+                                Moyenne
+                            </div>
+
+                            <div class="radio-desc">
+                                60px
+                            </div>
+
+                        </div>
+
+                    </label>
+
+
+                    <!-- Difficile -->
+
+                    <label class="radio-card">
+
+                        <input type="radio" name="difficulty" value="40" />
+
+                        <div class="radio-card-content">
+
+                            <i class="fas fa-face-angry radio-icon"></i>
+
+                            <div class="radio-title">
+                                Difficile
+                            </div>
+
+                            <div class="radio-desc">
+                                40px
+                            </div>
+
+                        </div>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- DURÉE -->
+
+            <div>
+
+                <label class="input-label">
+
+                    <i class="fas fa-clock"></i>Durée
+
+                </label>
+
+                <div class="radio-grid-3">
+
+                    <!-- 10s -->
+
+                    <label class="radio-card">
+
+                        <input type="radio" name="duration" value="10" />
+
+                        <div class="radio-card-content">
+
+                            <i class="fas fa-hourglass-start radio-icon"></i>
+
+                            <div class="radio-title">
+                                10 sec
+                            </div>
+
+                            <div class="radio-desc">
+                                Rapide
+                            </div>
+
+                        </div>
+
+                    </label>
+
+
+                    <!-- 20s -->
+
+                    <label class="radio-card">
+
+                        <input type="radio" name="duration" value="20" checked />
+
+                        <div class="radio-card-content">
+
+                            <i class="fas fa-hourglass-half radio-icon"></i>
+
+                            <div class="radio-title">
+                                20 sec
+                            </div>
+
+                            <div class="radio-desc">
+                                Standard
+                            </div>
+
+                        </div>
+
+                    </label>
+
+
+                    <!-- 30s -->
+
+                    <label class="radio-card">
+
+                        <input type="radio" name="duration" value="30" />
+
+                        <div class="radio-card-content">
+
+                            <i class="fas fa-hourglass-end radio-icon"></i>
+
+                            <div class="radio-title">
+                                30 sec
+                            </div>
+
+                            <div class="radio-desc">
+                                Marathon
+                            </div>
+
+                        </div>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- BOUTON -->
+
+            <div class="pt-2">
+
+                <button type="submit" class="btn-primary">
+
+                    <i class="fas fa-rocket mr-2"></i>
+
+                    Lancer la partie
+
+                </button>
+
+            </div>
+
+        </form>
+
+
+        <!-- PIED DE PAGE -->
+
+        <div class="mt-6 pt-4 border-t border-white/5">
+
+            <div class="flex justify-center gap-4 text-xs text-slate-500 flex-wrap">
+
+                <span>
+                    <i class="fas fa-mouse-pointer mr-1"></i>
+                    Cliquez sur la cible
+                </span>
+
+                <span>
+                    <i class="fas fa-clock mr-1"></i>
+                    Chronométré
+                </span>
+
+                <span>
+                    <i class="fas fa-chart-line mr-1"></i>
+                    Précision mesurée
+                </span>
+
+            </div>
+
+            <div class="text-center text-xs text-slate-600 mt-3">
+
+                Nova Arcade Studio • Prototype v1.0
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="main-block" id="main-block">
+        <div id="time-out"></div>
+    </div>
+
 
     <script src="main.js"></script>
+
 </body>
 
 </html>
