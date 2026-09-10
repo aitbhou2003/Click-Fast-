@@ -24,13 +24,13 @@ form.addEventListener("submit", function (event) {
 
   document.querySelector(".config").style.display = "none";
 
-
   createBoxes(difficulty);
-  
+
   mainBlock.style.display = "flex";
-  
+//   mainBlock.style.display = "block";
+
+
   choseRandomBox();
- 
 
   //   console.log(mainBlock);
 });
@@ -74,9 +74,14 @@ function choseRandomBox() {
   console.log(random_box_id);
 
   random_box.style.background = "black";
-//   const fils_box = document.querySelectorAll(".fils-block");
-//   console.log(fils_box);
+  //   const fils_box = document.querySelectorAll(".fils-block");
+  //   console.log(fils_box);
+
+  random_box.addEventListener("click", () => {
+
+    random_box.style.background = "";
+
+    choseRandomBox();
+  },{once:true});
+
 }
-
-
-
