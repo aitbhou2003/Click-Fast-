@@ -7,8 +7,9 @@ let isGameOver = false;
 let misses = 0;
 let endTime = 0;
 let countdownInterval = null;
-// mainBlock.style.display = "none";
 
+let currentMode = "Classique";
+// mainBlock.style.display = "none";
 
 function showView(id) {
   document
@@ -24,12 +25,41 @@ document
   .getElementById("btn-history-home")
   .addEventListener("click", () => showView("view-home"));
 
+function updateHUD() {
+  const remaining = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
+  document.getElementById("hud-time").textContent = remaining;
+  document.getElementById("hud-score").textContent = score;
+  document.getElementById("hud-miss").textContent = misses;
+}
+
+function startCountdown() {
+  clearInterval(countdownInterval);
+
+  countdownInterval = setInterval(() => {
+    updateHUD();
+
+    if (Date.now() >= endTime) {
+      endGame();
+    }
+  }, 100);
+}
+
+
+function endGame() {
+  if (isGameOver) return;
+  isGameOver = true;
+  clearInterval(countdownInterval);
+  console.log("Partie terminée ! Score:", score);
+}
+
+
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
   const pseudo = form.pseudo.value;
 
   const mode = form.mode.value;
+  currentMode === "Precision" ? "block" : "none";
 
   const difficulty = Number(form.difficulty.value);
 
@@ -48,14 +78,21 @@ form.addEventListener("submit", function (event) {
   clearInterval(countdownInterval);
   //   document.querySelector(".config").style.display = "none";
 
+  document.getElementById("hud-misses").style.display =
+    currentMode === "Precision" ? "block" : "none";
+
+
   createBoxes(difficulty);
 
-//   mainBlock.style.display = "flex";
+  //   mainBlock.style.display = "flex";
   //   mainBlock.style.display = "block";
 
   choseRandomBox();
-  showView("view-game");
 
+  endTime = Date.now() + Number(duration) * 1000;
+  startCountdown();
+
+  showView("view-game");
 
   //   console.log(mainBlock);
 });
@@ -110,8 +147,19 @@ function choseRandomBox() {
       random_box.style.background = "";
 
       choseRandomBox();
-      console.log(score);
+      //   console.log(score);
     },
     { once: true },
   );
 }
+
+mainBlock.addEventListener("click", function (e) {
+  if (isGameOver) return;
+
+  if (currentMode !== "Precision") return;
+
+  if (e.target.style.background === "black") return;
+
+  misses++;
+  updateHUD();
+});
