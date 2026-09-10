@@ -1,420 +1,213 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 
 <head>
-
-    <meta charset="UTF-8" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Click Fast! - Accueil</title>
-
-    <!-- Tailwind CSS CDN -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Click Fast!</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- Font Awesome pour les icônes -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
     <link rel="stylesheet" href="main.css">
-
 </head>
 
 <body>
 
-    <div class="config glass-card w-full max-w-2xl p-8">
-
-        <!-- EN-TÊTE -->
-
-        <div class="text-center mb-8">
-
-            <div class="flex justify-center mb-4">
-
-                <div
-                    class="w-20 h-20 md:w-24 md:h-24 rounded-full icon-circle flex items-center justify-center float-animation">
-
-                    <i class="fas fa-bolt text-white text-3xl md:text-4xl"></i>
-
-                </div>
-
+    <!-- ==================== VIEW 1 : ACCUEIL ==================== -->
+    <section id="view-home">
+        <div class="glass-card float-animation w-full max-w-md p-8 text-center">
+            <div class="icon-circle w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">🎯
             </div>
-
-            <h1 class="text-4xl md:text-5xl font-bold gradient-text mb-2">
-                Click Fast!
-            </h1>
-
-            <p class="text-slate-400 text-sm md:text-base">
-                Testez vos réflexes et votre précision
-            </p>
-
+            <h1 class="text-4xl font-extrabold gradient-text mb-4">Click Fast!</h1>
+            <p class="text-slate-400 mb-6">Cliquez sur la cible le plus vite possible avant la fin du chrono.</p>
+            <div class="stats-grid mb-6">
+                <div class="stat-item">
+                    <div class="value" id="home-record">0</div>
+                    <div class="label">Record actuel</div>
+                </div>
+                <div class="stat-item">
+                    <div class="value">2</div>
+                    <div class="label">Modes</div>
+                </div>
+                <div class="stat-item">
+                    <div class="value">3</div>
+                    <div class="label">Difficultés</div>
+                </div>
+            </div>
+            <button id="btn-to-config" class="btn-primary">Jouer</button>
         </div>
+    </section>
 
+    <!-- ==================== VIEW 2 : CONFIGURATION ==================== -->
+    <section id="view-config">
+        <div class="glass-card w-full max-w-md p-8">
+            <h2 class="text-2xl font-bold gradient-text mb-6 text-center">Configuration</h2>
 
-        <!-- STATISTIQUES -->
+            <form id="config-form">
+                <!-- Pseudo -->
+                <div class="mb-5">
+                    <label class="input-label" for="pseudo"><i>👤</i>Pseudo</label>
+                    <input type="text" name="pseudo" id="pseudo" maxlength="20" placeholder="Entrez votre pseudo"
+                        class="input-field" required>
+                </div>
 
-        <div class="stats-grid mb-8">
+                <!-- Mode (radio cards) -->
+                <div class="mb-5">
+                    <span class="input-label"><i>🎮</i>Mode de jeu</span>
+                    <div class="radio-grid-3">
+                        <label class="radio-card">
+                            <input type="radio" name="mode" value="Classique" checked>
+                            <div class="radio-card-content">
+                                <span class="radio-icon">⚡</span>
+                                <div class="radio-title">Classique</div>
+                                <div class="radio-desc">Clics ratés ignorés</div>
+                            </div>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="mode" value="Precision">
+                            <div class="radio-card-content">
+                                <span class="radio-icon">🎯</span>
+                                <div class="radio-title">Précision</div>
+                                <div class="radio-desc">Chaque raté compte</div>
+                            </div>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="mode" value="Precision" disabled>
+                            <div class="radio-card-content opacity-40">
+                                <span class="radio-icon">🔥</span>
+                                <div class="radio-title">Défi</div>
+                                <div class="radio-desc">Bientôt</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
 
-            <div class="stat-item">
+                <!-- Durée -->
+                <div class="mb-5">
+                    <span class="input-label"><i>⏱️</i>Durée</span>
+                    <div class="radio-grid-3">
+                        <label class="radio-card">
+                            <input type="radio" name="duration" value="10" checked>
+                            <div class="radio-card-content">
+                                <span class="radio-icon">⚡</span>
+                                <div class="radio-title">10s</div>
+                            </div>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="duration" value="20">
+                            <div class="radio-card-content">
+                                <span class="radio-icon">⏳</span>
+                                <div class="radio-title">20s</div>
+                            </div>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="duration" value="30">
+                            <div class="radio-card-content">
+                                <span class="radio-icon">🕐</span>
+                                <div class="radio-title">30s</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
 
-                <div class="value">0</div>
+                <!-- Difficulté -->
+                <div class="mb-6">
+                    <span class="input-label"><i>📏</i>Difficulté</span>
+                    <div class="radio-grid-3">
+                        <label class="radio-card">
+                            <input type="radio" name="difficulty" value="80">
+                            <div class="radio-card-content">
+                                <span class="radio-icon">🙂</span>
+                                <div class="radio-title">Facile</div>
+                                <div class="radio-desc">80px</div>
+                            </div>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="difficulty" value="60" checked>
+                            <div class="radio-card-content">
+                                <span class="radio-icon">😎</span>
+                                <div class="radio-title">Moyenne</div>
+                                <div class="radio-desc">60px</div>
+                            </div>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="difficulty" value="40">
+                            <div class="radio-card-content">
+                                <span class="radio-icon">😈</span>
+                                <div class="radio-title">Difficile</div>
+                                <div class="radio-desc">40px</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
 
-                <div class="label">🏆 Meilleur score</div>
-
-            </div>
-
-            <div class="stat-item">
-
-                <div class="value text-purple-400">20s</div>
-
-                <div class="label">⏱️ Durée défaut</div>
-
-            </div>
-
-            <div class="stat-item">
-
-                <div class="value text-pink-400">60px</div>
-
-                <div class="label">🎯 Difficulté défaut</div>
-
-            </div>
-
+                <button type="submit" class="btn-primary">Lancer la partie 🚀</button>
+            </form>
         </div>
+    </section>
 
-
-        <!-- FORMULAIRE -->
-
-        <form id="config-form" class="space-y-6">
-
-            <!-- PSEUDO -->
-
-            <div>
-
-                <label for="pseudo" class="input-label">
-
-                    <i class="fas fa-user"></i>Pseudo
-
-                </label>
-
-                <input type="text" id="pseudo" name="pseudo" class="input-field"
-                    placeholder="Entrez votre pseudo (2-20 caractères)" minlength="2" maxlength="20" required
-                    autocomplete="off" />
-
-            </div>
-
-
-            <!-- MODE -->
-
-            <div>
-
-                <label class="input-label">
-
-                    <i class="fas fa-gamepad"></i>Mode de jeu
-
-                </label>
-
-                <div class="radio-grid-3">
-
-                    <!-- Classique -->
-
-                    <label class="radio-card">
-
-                        <input type="radio" name="mode" value="Classique" />
-
-                        <div class="radio-card-content">
-
-                            <i class="fas fa-bullseye radio-icon"></i>
-
-                            <div class="radio-title">
-                                Classique
-                            </div>
-
-                            <div class="radio-desc">
-                                Score uniquement
-                            </div>
-
-                        </div>
-
-                    </label>
-
-
-                    <!-- Précision -->
-
-                    <label class="radio-card">
-
-                        <input type="radio" name="mode" value="Précision" checked />
-
-                        <div class="radio-card-content">
-
-                            <i class="fas fa-crosshairs radio-icon"></i>
-
-                            <div class="radio-title">
-                                Précision
-                            </div>
-
-                            <div class="radio-desc">
-                                Score + Précision
-                            </div>
-
-                        </div>
-
-                    </label>
-
-
-                    <!-- Défi -->
-
-                    <label class="radio-card">
-
-                        <input type="radio" name="mode" value="Défi" />
-
-                        <div class="radio-card-content">
-
-                            <i class="fas fa-bolt radio-icon"></i>
-
-                            <div class="radio-title">
-                                Défi
-                            </div>
-
-                            <div class="radio-desc">
-                                Cible mobile
-                            </div>
-
-                        </div>
-
-                    </label>
-
+    <!-- ==================== VIEW 3 : ARÈNE ==================== -->
+    <section id="view-game">
+        <div class="glass-card p-6">
+            <!-- HUD -->
+            <div class="stats-grid mb-5">
+                <div class="stat-item">
+                    <div class="value" id="hud-time">10</div>
+                    <div class="label">Temps restant</div>
                 </div>
-
-            </div>
-
-
-            <!-- DIFFICULTÉ -->
-
-            <div>
-
-                <label class="input-label">
-
-                    <i class="fas fa-bullseye"></i>Difficulté
-
-                </label>
-
-                <div class="radio-grid-3">
-
-                    <!-- Facile -->
-
-                    <label class="radio-card">
-
-                        <input type="radio" name="difficulty" value="80" />
-
-                        <div class="radio-card-content">
-
-                            <i class="fas fa-face-smile radio-icon"></i>
-
-                            <div class="radio-title">
-                                Facile
-                            </div>
-
-                            <div class="radio-desc">
-                                80px
-                            </div>
-
-                        </div>
-
-                    </label>
-
-
-                    <!-- Moyenne -->
-
-                    <label class="radio-card">
-
-                        <input type="radio" name="difficulty" value="60" checked />
-
-                        <div class="radio-card-content">
-
-                            <i class="fas fa-face-meh radio-icon"></i>
-
-                            <div class="radio-title">
-                                Moyenne
-                            </div>
-
-                            <div class="radio-desc">
-                                60px
-                            </div>
-
-                        </div>
-
-                    </label>
-
-
-                    <!-- Difficile -->
-
-                    <label class="radio-card">
-
-                        <input type="radio" name="difficulty" value="40" />
-
-                        <div class="radio-card-content">
-
-                            <i class="fas fa-face-angry radio-icon"></i>
-
-                            <div class="radio-title">
-                                Difficile
-                            </div>
-
-                            <div class="radio-desc">
-                                40px
-                            </div>
-
-                        </div>
-
-                    </label>
-
+                <div class="stat-item">
+                    <div class="value" id="hud-score">0</div>
+                    <div class="label">Score</div>
                 </div>
-
-            </div>
-
-
-            <!-- DURÉE -->
-
-            <div>
-
-                <label class="input-label">
-
-                    <i class="fas fa-clock"></i>Durée
-
-                </label>
-
-                <div class="radio-grid-3">
-
-                    <!-- 10s -->
-
-                    <label class="radio-card">
-
-                        <input type="radio" name="duration" value="10" />
-
-                        <div class="radio-card-content">
-
-                            <i class="fas fa-hourglass-start radio-icon"></i>
-
-                            <div class="radio-title">
-                                10 sec
-                            </div>
-
-                            <div class="radio-desc">
-                                Rapide
-                            </div>
-
-                        </div>
-
-                    </label>
-
-
-                    <!-- 20s -->
-
-                    <label class="radio-card">
-
-                        <input type="radio" name="duration" value="20" checked />
-
-                        <div class="radio-card-content">
-
-                            <i class="fas fa-hourglass-half radio-icon"></i>
-
-                            <div class="radio-title">
-                                20 sec
-                            </div>
-
-                            <div class="radio-desc">
-                                Standard
-                            </div>
-
-                        </div>
-
-                    </label>
-
-
-                    <!-- 30s -->
-
-                    <label class="radio-card">
-
-                        <input type="radio" name="duration" value="30" />
-
-                        <div class="radio-card-content">
-
-                            <i class="fas fa-hourglass-end radio-icon"></i>
-
-                            <div class="radio-title">
-                                30 sec
-                            </div>
-
-                            <div class="radio-desc">
-                                Marathon
-                            </div>
-
-                        </div>
-
-                    </label>
-
+                <div class="stat-item" id="hud-misses">
+                    <div class="value" id="hud-miss">0</div>
+                    <div class="label">Ratés</div>
                 </div>
-
             </div>
 
-
-            <!-- BOUTON -->
-
-            <div class="pt-2">
-
-                <button type="submit" class="btn-primary">
-
-                    <i class="fas fa-rocket mr-2"></i>
-
-                    Lancer la partie
-
-                </button>
-
-            </div>
-
-        </form>
-
-
-        <!-- PIED DE PAGE -->
-
-        <div class="mt-6 pt-4 border-t border-white/5">
-
-            <div class="flex justify-center gap-4 text-xs text-slate-500 flex-wrap">
-
-                <span>
-                    <i class="fas fa-mouse-pointer mr-1"></i>
-                    Cliquez sur la cible
-                </span>
-
-                <span>
-                    <i class="fas fa-clock mr-1"></i>
-                    Chronométré
-                </span>
-
-                <span>
-                    <i class="fas fa-chart-line mr-1"></i>
-                    Précision mesurée
-                </span>
-
-            </div>
-
-            <div class="text-center text-xs text-slate-600 mt-3">
-
-                Nova Arcade Studio • Prototype v1.0
-
-            </div>
-
+            <div id="main-block" class="main-block mx-auto"></div>
         </div>
+    </section>
 
-    </div>
+    <!-- ==================== VIEW 4 : RÉSULTATS ==================== -->
+    <section id="view-results">
+        <div class="glass-card w-full max-w-md p-8 text-center">
+            <div class="icon-circle w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">🏁
+            </div>
+            <h2 class="text-2xl font-bold gradient-text mb-6">Bilan de la session</h2>
 
+            <div class="stats-grid mb-6">
+                <div class="stat-item">
+                    <div class="value" id="res-score">0</div>
+                    <div class="label">Score</div>
+                </div>
+                <div class="stat-item" id="res-precision-block">
+                    <div class="value"><span id="res-precision">0</span>%</div>
+                    <div class="label">Précision</div>
+                </div>
+                <div class="stat-item">
+                    <div class="value" id="res-pseudo">—</div>
+                    <div class="label">Joueur</div>
+                </div>
+            </div>
 
-    <div class="main-block" id="main-block">
-        <div id="time-out"></div>
-    </div>
+            <p id="res-record-line" class="text-slate-300 mb-6"></p>
 
+            <button id="btn-replay" class="btn-primary mb-3">Rejouer 🔁</button>
+            <button id="btn-to-history" class="btn-primary"
+                style="background: linear-gradient(135deg, #334155, #475569);">Historique 📜</button>
+        </div>
+    </section>
+
+    <!-- ==================== VIEW 5 : HISTORIQUE ==================== -->
+    <section id="view-history">
+        <div class="glass-card w-full max-w-md p-8">
+            <h2 class="text-2xl font-bold gradient-text mb-6 text-center">Historique</h2>
+            <p class="text-slate-400 text-sm text-center mb-4">20 dernières sessions</p>
+            <ul id="history-list" class="space-y-2 mb-6"></ul>
+            <button id="btn-history-home" class="btn-primary">Retour à l'accueil</button>
+        </div>
+    </section>
 
     <script src="main.js"></script>
-
 </body>
 
 </html>

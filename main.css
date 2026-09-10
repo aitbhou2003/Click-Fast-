@@ -221,7 +221,7 @@ body {
 /* Main block */
 
 .main-block {
-  background-color: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  background: rgba(255, 255, 255, 0.03);
   width: 500px;
   height: 500px;
 
@@ -249,6 +249,10 @@ body {
   box-sizing: border-box;
 
   border-radius: 4px;
+}
+
+#view-config, #view-game, #view-results, #view-history {
+  display: none;
 }
 
 /* Responsive */
@@ -283,4 +287,9 @@ body {
     grid-template-columns: 1fr;
     gap: 8px;
   }
+  .main-block {
+    width: 360px;
+    height: 360px;
+  }
+
 }

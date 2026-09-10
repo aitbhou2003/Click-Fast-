@@ -1,7 +1,28 @@
 const form = document.getElementById("config-form");
 
 const mainBlock = document.querySelector("#main-block");
-mainBlock.style.display = "none";
+let score = 0;
+let timer;
+let isGameOver = false;
+let misses = 0;
+let endTime = 0;
+let countdownInterval = null;
+// mainBlock.style.display = "none";
+
+
+function showView(id) {
+  document
+    .querySelectorAll("section")
+    .forEach((s) => (s.style.display = "none"));
+  document.getElementById(id).style.display = "block";
+}
+
+document
+  .getElementById("btn-to-config")
+  .addEventListener("click", () => showView("view-config"));
+document
+  .getElementById("btn-history-home")
+  .addEventListener("click", () => showView("view-home"));
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
@@ -21,16 +42,20 @@ form.addEventListener("submit", function (event) {
   //   console.log(difficulty, typeof difficulty);
 
   //   console.log(duration);
-
-  document.querySelector(".config").style.display = "none";
+  score = 0;
+  misses = 0;
+  isGameOver = false;
+  clearInterval(countdownInterval);
+  //   document.querySelector(".config").style.display = "none";
 
   createBoxes(difficulty);
 
-  mainBlock.style.display = "flex";
-//   mainBlock.style.display = "block";
-
+//   mainBlock.style.display = "flex";
+  //   mainBlock.style.display = "block";
 
   choseRandomBox();
+  showView("view-game");
+
 
   //   console.log(mainBlock);
 });
@@ -77,11 +102,16 @@ function choseRandomBox() {
   //   const fils_box = document.querySelectorAll(".fils-block");
   //   console.log(fils_box);
 
-  random_box.addEventListener("click", () => {
+  random_box.addEventListener(
+    "click",
+    () => {
+      score++;
 
-    random_box.style.background = "";
+      random_box.style.background = "";
 
-    choseRandomBox();
-  },{once:true});
-
+      choseRandomBox();
+      console.log(score);
+    },
+    { once: true },
+  );
 }
