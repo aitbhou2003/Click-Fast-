@@ -44,7 +44,6 @@ function startCountdown() {
   }, 100);
 }
 
-
 function endGame() {
   if (isGameOver) return;
   isGameOver = true;
@@ -52,14 +51,13 @@ function endGame() {
   console.log("Partie terminée ! Score:", score);
 }
 
-
 form.addEventListener("submit", function (event) {
   event.preventDefault();
 
   const pseudo = form.pseudo.value;
 
   const mode = form.mode.value;
-  currentMode === "Precision" ? "block" : "none";
+  currentMode = mode;
 
   const difficulty = Number(form.difficulty.value);
 
@@ -80,7 +78,6 @@ form.addEventListener("submit", function (event) {
 
   document.getElementById("hud-misses").style.display =
     currentMode === "Precision" ? "block" : "none";
-
 
   createBoxes(difficulty);
 
@@ -135,15 +132,18 @@ function choseRandomBox() {
   const random_box = document.getElementById(`${random_box_id}`);
   console.log(random_box_id);
 
+  random_box.classList.add("target");
   random_box.style.background = "black";
   //   const fils_box = document.querySelectorAll(".fils-block");
   //   console.log(fils_box);
 
   random_box.addEventListener(
     "click",
-    () => {
+    (e) => {
+      if (isGameOver) return;
+      e.stopPropagation();
       score++;
-
+      random_box.classList.remove("target");
       random_box.style.background = "";
 
       choseRandomBox();
@@ -158,7 +158,8 @@ mainBlock.addEventListener("click", function (e) {
 
   if (currentMode !== "Precision") return;
 
-  if (e.target.style.background === "black") return;
+  //   if (e.target.style.background == "black") return;
+  if (e.target.classList.contains("target")) return;
 
   misses++;
   updateHUD();
